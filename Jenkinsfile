@@ -53,14 +53,13 @@ node ('host') {
 		'''
 		}
 	
-	stage('Sending status') {
-		echo "SUCCESS"
-		}
       }
       catch (Exception err) {
 	currentBuild.result = 'FAILURE'
       }
-	echo "RESULT: ${currentBuild.result}"
+	stage('Sending status') {
+		echo "RESULT: ${currentBuild.result}
+	}
 	
    }
 }
