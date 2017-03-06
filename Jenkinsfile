@@ -1,8 +1,8 @@
 #!groovy
 
 //Setting parameters for current node: tools, PATH, HOME
-node('master') {
-//node('host') {	
+//node('master') {
+node('host') {	
 	tool name: 'java8', type: 'jdk'
 	tool name: 'gradle3.3', type: 'gradle'
 	env.JAVA_HOME="${tool 'java8'}"
@@ -67,7 +67,7 @@ catch (hudson.AbortException e) {
         echo "the job was cancelled or aborted"
 	sh "echo ${e}"
 	sh '''
-	curl -u admin:admin ${BUILD_URL}/consoleText > console.txt
+	curl ${BUILD_URL}/consoleText > console.txt
 	ABORT_USER=$(grep \'^Aborted by.*$\' console.txt)
 	echo $ABORT_USER
 	'''
