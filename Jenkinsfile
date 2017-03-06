@@ -47,7 +47,7 @@ node ('host') {
 	stage('Deployment') {
 		sh ''' 
 		java -version
-		java -jar gradle-simple2.jar
+		java -jar gradle-simple.jar
 		ls -lh
 		'''
 		}
