@@ -1,6 +1,6 @@
 node ('host') {
    tool name: 'gradle3.3', type: 'gradle'
-   tool name: 'java8', type: 'jdk'
+   tool name: 'java7', type: 'jdk'
    withEnv(["PATH+GRADLE=${tool 'gradle3.3'}/bin","JAVA_HOME=${tool 'java8'}","PATH+JAVA=${tool 'java8'}/bin"])
    {
       try {
