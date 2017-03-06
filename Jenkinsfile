@@ -1,8 +1,8 @@
 #!groovy
 
 //Setting parameters for current node: tools, PATH, HOME
-node('master') {
-//node('host') {	
+//node('master') {
+node('host') {	
 	tool name: 'java8', type: 'jdk'
 	tool name: 'gradle3.3', type: 'gradle'
 	env.JAVA_HOME="${tool 'java8'}"
@@ -74,44 +74,15 @@ catch (hudson.AbortException e) {
         mail body: "project build error: ${e}" ,
         subject: 'project build failed',
         to: 'n.g.kuznetsov@gmail.com'
-//    	throw e
-    } 
+	throw e
+	} 
 
-/*
-catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e){
-
-        echo "the job was cancelled or aborted"
-        sh "echo ${e}"
-         
-//	throw e
-}
-*/
 catch (error) {
         currentBuild.result = "FAILED"
         sh "echo ${error}"
         mail body: "project build error: ${error}" ,
         subject: 'project build failed',
         to: 'n.g.kuznetsov@gmail.com'
-        throw e
-    }
-
-
-/*catch (caughtError) {
-    err = caughtError
-    currentBuild.result = "FAILURE"
-
-	mail body: "project build error: ${err}" ,
-	subject: 'project build failed',
-	to: 'n.g.kuznetsov@gmail.com'
-} 
-*/
-
-///*
-//finally {
-
- //   * Must re-throw exception to propagate error */
-//    if (err) {
- //       throw err
-//	}	
-//    } 
+        throw error
+	}
 }
