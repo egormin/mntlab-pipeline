@@ -6,7 +6,7 @@ node ('host') {
       try {
 	stage('Checking out') { 
 		git url: 'https://github.com/MNT-Lab/mntlab-pipeline.git', branch: 'amatveenko'
-		echo "${result}"
+		sh 'echo ${result}'
 		}
     
 	stage('Building code') {
