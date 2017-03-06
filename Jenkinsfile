@@ -45,7 +45,7 @@ node ('host') {
 		}
 
 	stage ('Asking for manual approval')
-		timeout(time:1, unit:'MINUTES') {
+		timeout(time:5, unit:'MINUTES') {
 		result = "error 6:Perhaps you didn't confirm the deployment"
 		input message:'Approve deployment?'
 		}
