@@ -21,7 +21,7 @@ node ('host') {
 		jacoco: {
 		sh 'gradle jacoco'}, 
 		cucumber: {
-		sh 'gradle cucumber'}
+		sh 'gradle cucumber'};
     		}
  
 	stage ('Triggering job and fetching') {
