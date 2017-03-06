@@ -1,8 +1,8 @@
 #!groovy
 
 //Setting parameters for current node: tools, PATH, HOME
-//node('master') {
-node('host') {	
+node('master') {
+//node('host') {	
 	tool name: 'java8', type: 'jdk'
 	tool name: 'gradle3.3', type: 'gradle'
 	env.JAVA_HOME="${tool 'java8'}"
@@ -66,10 +66,11 @@ catch (hudson.AbortException e) {
         currentBuild.result = "ABORTED"
         echo "the job was cancelled or aborted"
 	sh "echo ${e}"
-	sh 'curl ${BUILD_URL}/consoleText > console.txt'
-	sh 'ABORT_USER=$(grep \'^Aborted by.*$\' console.txt)'
-	sh "echo $ABORT_USER"
-	
+	sh '''
+	curl ${BUILD_URL}/consoleText > console.txt
+	ABORT_USER=$(grep \'^Aborted by.*$\' console.txt)
+	echo $ABORT_USER
+	'''
         mail body: "project build error: ${e}" ,
         subject: 'project build failed',
         to: 'n.g.kuznetsov@gmail.com'
