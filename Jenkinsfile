@@ -38,10 +38,10 @@ node ('host') {
         	archiveArtifacts artifacts: "pipeline-${BRANCH_NAME}-${BUILD_NUMBER}.tar.gz"
 		}
 
-	stage ('Asking for manual approval')
-		timeout(time:5, unit:'MINUTES') {
-		input message:'Approve deployment?'
-		}
+	//stage ('Asking for manual approval')
+	//	timeout(time:5, unit:'MINUTES') {
+	//	input message:'Approve deployment?'
+	//	}
 	
 	stage('Deployment') {
 		sh ''' 
