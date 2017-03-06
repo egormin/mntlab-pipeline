@@ -11,7 +11,7 @@ node ('host') {
 	stage('Building code') {
         	sh '''    
 		java -version
-        	gradle build
+        	gradle clean build
         	'''
         	}
     
