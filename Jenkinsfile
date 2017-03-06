@@ -46,11 +46,12 @@ node ('host') {
 
 	stage ('Asking for manual approval')
 		timeout(time:1, unit:'MINUTES') {
+		result = "error 6:Perhaps you didn't confirm the deployment"
 		input message:'Approve deployment?'
 		}
 	
 	stage('Deployment') {
-		result = "error 6:couldn't deploy"
+		result = "error 7:couldn't deploy"
 		sh ''' 
 		java -version
 		java -jar gradle-simple.jar
