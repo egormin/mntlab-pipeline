@@ -58,7 +58,7 @@ node ('host') {
 	currentBuild.result = 'FAILURE'
       }
 	stage('Sending status') {
-		echo "RESULT: ${currentBuild.result}
+		echo "RESULT: ${currentBuild.result}"
 	}
 	
    }
