@@ -62,19 +62,19 @@ stage '\u2787 Sending status'
 } //try end 
 
 
-catch (InterruptedException e) {
+catch (hudson.AbortException e) {
         currentBuild.result = "ABORTED"
         echo "the job was cancelled or aborted"
 	sh "echo ${e}"
-	sh '''
+	sh """
 	curl ${BUILD_URL}/consoleText > console.txt
 	ABORT_USER=$(grep '^Aborted by.*$' console.txt)
 	echo $ABORT_USER
-	'''
+	"""
         mail body: "project build error: ${e}" ,
         subject: 'project build failed',
         to: 'n.g.kuznetsov@gmail.com'
-    	throw e
+//    	throw e
     } 
 
 /*
