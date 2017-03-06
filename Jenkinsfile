@@ -13,17 +13,8 @@ node('host') {
 //      withEnv(["JAVA_HOME=${tool 'java8'}"])
 
 
-//ENbling errors cathing
-//	def err = null
-//	currentBuild.result = "SUCCESS"
-
-//	try {
-
-def doTheThing(Closure doMe) {
-    try {
-        return doMe()
-
-
+try {
+	currentBuild.result = "SUCCESS"
 
 
 //All stages step-by-step
@@ -68,17 +59,19 @@ stage '\u2786 Deployment'
 
 stage '\u2787 Sending status'
 	echo "\u2705 RESULT: ${currentBuild.result}"
-} 
+} //try end 
 
-/*catch (InterruptedException e) {
+
+catch (InterruptedException e) {
         currentBuild.result = "ABORTED"
 	sh "echo ${e}"
+
         mail body: "project build error: ${e}" ,
         subject: 'project build failed',
         to: 'n.g.kuznetsov@gmail.com'
     	throw e
     } 
-*/
+
 /*
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e){
 
@@ -87,15 +80,15 @@ catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e){
          
 //	throw e
 }
-catch (e) {
+*/
+catch (error) {
         currentBuild.result = "FAILED"
-        sh "echo ${e}"
-        mail body: "project build error: ${e}" ,
+        sh "echo ${error}"
+        mail body: "project build error: ${error}" ,
         subject: 'project build failed',
         to: 'n.g.kuznetsov@gmail.com'
         throw e
     }
-*/
 
 
 /*catch (caughtError) {
@@ -107,28 +100,6 @@ catch (e) {
 	to: 'n.g.kuznetsov@gmail.com'
 } 
 */
-
-
-//def doTheThing(Closure doMe) {
-//    try {
-//        return doMe()
-     catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException fie) {
-        // this ambiguous condition means a user probably aborted
-        if (fie.causes.size() == 0) {
-            throw new UserInterruptedException(fie)
-        } else {
-            throw fie
-        }
-    } catch (hudson.AbortException ae) {
-        // this ambiguous condition means during a shell step, user probably aborted
-        if (ae.getMessage().contains('script returned exit code 143')) {
-            throw new UserInterruptedException(ae)
-        } else {
-            throw ae
-        }
-    }
-}
-
 
 ///*
 //finally {
