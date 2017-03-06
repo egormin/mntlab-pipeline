@@ -11,18 +11,18 @@ node ('host') {
 	stage('Building code') {
         	sh '''    
 		java -version
-        	gradle clean build
+        	gradle build
         	'''
         	}
     
-	stage('Testing') 
-    		parallel junit: {
-		sh 'gradle test'}, 
-		jacoco: {
-		sh 'gradle jacoco'}, 
-		cucumber: {
-		sh 'gradle cucumber'}
-    		}
+	//stage('Testing') 
+    	//	parallel junit: {
+	//	sh 'gradle test'}, 
+	//	jacoco: {
+	//	sh 'gradle jacoco'}, 
+	//	cucumber: {
+	//	sh 'gradle cucumber'}
+    	//	}
  
 	stage ('Triggering job and fetching') {
 		build job: "MNTLAB-${BRANCH_NAME}-child1-build-job", parameters: [[$class: 'StringParameterValue', name: 'BRANCH_NAME', value: "origin/${BRANCH_NAME}"]]
