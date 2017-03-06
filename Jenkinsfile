@@ -67,7 +67,7 @@ catch (hudson.AbortException e) {
         echo "the job was cancelled or aborted"
 	sh "echo ${e}"
 	sh '''
-	curl ${BUILD_URL}/consoleText > console.txt
+	curl -u admin:admin ${BUILD_URL}/consoleText > console.txt
 	ABORT_USER=$(grep \'^Aborted by.*$\' console.txt)
 	echo $ABORT_USER
 	'''
