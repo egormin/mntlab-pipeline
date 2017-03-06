@@ -3,7 +3,7 @@ node ('host') {
 	tool name: 'java8', type: 'jdk'
 	withEnv(["PATH+GRADLE=${tool 'gradle3.3'}/bin","JAVA_HOME=${tool 'java8'}","PATH+JAVA=${tool 'java8'}/bin"])
 	{
-  // try {
+      try {
 	stage('Checking out') { 
 		git url: 'https://github.com/MNT-Lab/mntlab-pipeline.git', branch: 'amatveenko'
 		}
@@ -55,8 +55,12 @@ node ('host') {
 	stage('Sending status') {
 		echo "SUCCESS"
 		}
-   }
-
+      }
+      catch (Exception err) {
+	currentBuild.result = 'FAILURE'
+	}
+	echo "RESULT: ${currentBuild.result}"
+	
+}
 
 // rm -rf *
-}
