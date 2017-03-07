@@ -5,7 +5,7 @@ node('host'){
     prepStatus = "\nPreparation: FAILURE"
     buildStatus = "\nBuilding code: FAILURE"
     testStatus = "\nTesting: FAILURE"
-    trigStatus = "\nTriggering job and fetching artefact Stage: FAILURE"
+    trigStatus = "\nTriggering job and fetching artefact: FAILURE"
     packStatus = "\nPackaging and Publishing results: FAILURE"
     aprStatus = "\nAsking for manual approval: FAILURE"
     deployStatus = "\nDeployment: FAILURE"
@@ -37,7 +37,7 @@ stage ('Triggering job and fetching artefact after finishing'){
     step ([$class: 'CopyArtifact',
           projectName: 'MNTLAB-akutsko-child1-build-job',
           filter: 'akutsko_dsl_script.tar.gz']);
-    trigStatus = "\nTriggering job and fetching artefact Stage: SACCESS"
+    trigStatus = "\nTriggering job and fetching artefact: SACCESS"
     }
 stage ('Packaging and Publishing results'){
     sh 'cp build/libs/$(basename "$PWD").jar akutsko-v1.${BUILD_NUMBER}.jar'
