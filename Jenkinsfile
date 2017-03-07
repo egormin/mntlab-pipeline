@@ -49,7 +49,7 @@ node('host')
 		     input 'deploy'
 		     } 
 		catch (err) {
-		    def user = err.getCauses()[0].getUser()
+		    def user = err.getCauses()[0].getUser() //need toget rights 
 		    echo "Aborted by:\n ${user}"
 		    throw err
 			    }
