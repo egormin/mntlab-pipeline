@@ -60,9 +60,8 @@ catch (ERROR){}
     stage('Sending status') 
    {
 	echo prepStatus + buildStatus + testStatus + trigStatus + packStatus + aprStatus + deployStatus
-        Status = [${prepStatus}, ${buildStatus}, ${testStatus}, ${trigStatus}, ${packStatus}, ${aprStatus}, ${deployStatus}]
-        if (Status.findAll { item -> item.contains('FAILURE') } ){currentBuild.result = 'FAILURE'}
-		else  {currentBuild.result = 'SACCESS'}
+        if (prepStatus=='SACCESS' || buildStatus=='SACCESS' || testStatus=='SACCESS' || trigStatus=='SACCESS'|| packStatus=='SACCESS' || aprStatus=='SACCESS' || deployStatus=='SACCESS'){currentBuild.result = 'FAILURE'}
+	else  {currentBuild.result = 'SACCESS'}
    }
 
 }
