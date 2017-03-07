@@ -57,8 +57,15 @@ try {
 
 
 			            stage('Asking for manual approval') {
-			            	echo 'Deploy?'
-			            	input "Badaboom?"
+                            try {
+                                input "Badaboom?"
+                            }
+                            catch (err) {
+                                def user = err.getCauses()[0].getUser()
+                                echo "WASTED by:\n ${user}"
+                                throw err
+                            }
+			            	
 			            }
 
 
@@ -70,9 +77,9 @@ try {
 
 
 			            stage('Sending status') {
-			            	echo 'Success'
-			            	sh 'tarwqe'
-			            }
+                            env.status = "Object completed"
+                            echo "$status"
+                        }
 
 
 			}
