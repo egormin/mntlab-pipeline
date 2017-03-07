@@ -60,8 +60,7 @@ catch (ERROR){}
     stage('Sending status') 
    {
 	echo prepStatus + buildStatus + testStatus + trigStatus + packStatus + aprStatus + deployStatus
-       """ if ( prepStatus!="2600" || buildStatus!="2600" || testStatus!="2600" || trigStatus!="2600" || packStatus!="2600" || aprStatus!="2600" || deployStatus!="2600" ){currentBuild.result = 'FAILURE'}
-        else {currentBuild.result = 'SACCESS'}"""
+        echo "BUILD SACCESS"
    }
 
 }
