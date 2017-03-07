@@ -57,15 +57,14 @@ try {
 
 
 			            stage('Asking for manual approval') {
-                            try {
-                                input "Badaboom?"
-                            }
-                            catch (err) {
-                                def user = err.getCauses()[0].getUser()
-                                echo "WASTED by:\n ${user}"
-                                throw err
-                            }
-			            	
+                            		try {
+                            		    input "Badaboom?"
+                            		}
+                            		catch (err) {
+                            		    def user = err.getCauses()[0].getUser()
+                            		    echo "WASTED by:\n ${user}"
+                            		    throw err
+                            		}
 			            }
 
 
