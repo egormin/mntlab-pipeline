@@ -45,11 +45,11 @@
 	input 'Artefact is ready for deploy. Do you want proceed?' 
 	}
     // deploy
-    stage 'Deployment'{
+    stage ('Deployment'){
 	sh 'java -jar ${BRANCH_NAME}-${BUILD_NUMBER}.jar'
     }
     // finishing job, success status.
-    stage 'Sending status'{
+    stage ('Sending status'){
 	echo "RESULT: Success"
     }
 }
