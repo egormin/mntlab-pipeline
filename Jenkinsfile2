@@ -42,7 +42,7 @@ stage ('Triggering job and fetching artefact after finishing'){
 stage ('Packaging and Publishing results'){
     sh 'cp build/libs/$(basename "$PWD").jar akutsko-v1.${BUILD_NUMBER}.jar'
     sh 'tar -xf akutsko_dsl_script.tar.gz jobs.groovy'
-    sh 'tar -cvzf pipeline-akutsko-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile  akutsko-v1.${BUILD_NUMBER}.jar'
+    sh 'tar -cvzf pipeline-akutsko2-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile  akutsko-v1.${BUILD_NUMBER}.jar'
     archiveArtifacts artifacts: 'pipeline-akutsko-${BUILD_NUMBER}.tar.gz', excludes: null
     packStatus = "\nPackaging and Publishing results: SACCESS"
     }
@@ -60,8 +60,6 @@ catch (ERROR){}
     stage('Sending status') 
    {
 	echo prepStatus + buildStatus + testStatus + trigStatus + packStatus + aprStatus + deployStatus
-        if (prepStatus=='SACCESS' || buildStatus=='SACCESS' || testStatus=='SACCESS' || trigStatus=='SACCESS'|| packStatus=='SACCESS' || aprStatus=='SACCESS' || deployStatus=='SACCESS'){currentBuild.result = 'FAILURE'}
-	else  {currentBuild.result = 'SACCESS'}
    }
 
 }
