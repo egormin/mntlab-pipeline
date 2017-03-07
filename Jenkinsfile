@@ -1,4 +1,3 @@
-#
 import hudson.AbortException
 
 node('host')
