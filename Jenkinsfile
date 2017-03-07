@@ -1,5 +1,3 @@
-#FAKE
-
 import hudson.AbortException
 
 node('host')
